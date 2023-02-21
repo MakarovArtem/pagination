@@ -1,0 +1,2 @@
+I am going to create a react app. First I will have to need to configure webpack so all my files and dirrectories eventually bundle into a working stuff.
+In this app I guess I will practice how to work with assynchronius functions, pagination, free API, most used react hooks.
