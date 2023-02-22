@@ -4,8 +4,8 @@
   "description": "I am going to create a react app. First I will have to need to configure webpack so all my files and dirrectories eventually bundle into a working stuff.\r In this app I guess I will practice how to work with assynchronius functions, pagination, free API, most used react hooks.",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack serve --open --mode development",
-    "start": "webpack-dev-server --open --hot",
+    "serve": "webpack serve --mode development --open --hot",
+    "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Artem Makarov",
@@ -16,6 +16,7 @@
     "@babel/preset-react": "^7.18.6",
     "babel-loader": "^9.1.2",
     "clean-webpack-plugin": "^4.0.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.7.3",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
