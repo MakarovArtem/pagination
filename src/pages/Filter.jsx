@@ -14,7 +14,7 @@ export default function Filter({filter, setFilter}) {
       value={filter.sort}
       selectCallback={selectedSortType => setFilter({...filter, sort: selectedSortType})}
       defaultName='Sort by..'
-      options={[{value: '', name: ''}, {value: '', name: ''}, {value: '', name: ''}]}
+      options={[{value: 'title', name: 'Title'}, {value: 'body', name: 'Description'}]}
     />
   </article>
   )
