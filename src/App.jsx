@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import PostService from "./API/PostService.js";
 import useFetching from "./hooks/useFetching.jsx";
-import { getNumberSequence, getPageCount } from "./utils/pages.js";
+import { getAdaptivePageNumbers, getNumberSequence, getPageCount } from "./utils/pages.js";
 
 import style from './App.module.css';
 
@@ -12,7 +12,7 @@ export default function App() {
   const [itemsOnPageLimit, setItemsOnPageLimit] = useState(10)
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
 
-  let buttonsForPages = getNumberSequence(totalPageCount);
+  let buttonsForPages = getAdaptivePageNumbers(totalPageCount, currentPageNumber, 2, '...');
 
   // const getPosts = async () => {
   //   const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
@@ -28,7 +28,8 @@ export default function App() {
   })
 
   useEffect(() => {
-    fetchPosts()
+    fetchPosts();
+    console.log(currentPageNumber)
   }, [currentPageNumber]);
 
   return(
@@ -36,19 +37,20 @@ export default function App() {
       <h1>Those are pages numbers</h1>
 
       <div className={style.buttonsPanel}>
-        <button className={style.navButton}>&lt;&lt;</button>
+        <button disabled={currentPageNumber === 1 ? true : false} className={style.navButton} onClick={() => setCurrentPageNumber(prev => prev - 1)}>&lt;&lt;</button>
         {
           buttonsForPages.map(pageNumber => 
           <button className={
             currentPageNumber === pageNumber ?
             style.navButtonCurrent :
             style.navButton}
+            disabled={typeof pageNumber !== 'number' ? true : false}
             onClick={() => setCurrentPageNumber(pageNumber)}
           >
             {pageNumber}
           </button>)
         }
-        <button className={style.navButton}>&gt;&gt;</button>
+        <button disabled={currentPageNumber === totalPageCount ? true : false} className={style.navButton} onClick={() => setCurrentPageNumber(prev => prev + 1)}>&gt;&gt;</button>
       </div>
 
       {
