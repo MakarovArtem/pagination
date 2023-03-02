@@ -37,7 +37,7 @@ export default function App() {
       <h1>Those are pages numbers</h1>
 
       <div className={style.buttonsPanel}>
-        <button disabled={currentPageNumber === 1 ? true : false} className={style.navButton} onClick={() => setCurrentPageNumber(prev => prev - 1)}>&lt;&lt;</button>
+        <button style={{display: currentPageNumber === 1 ? 'none' : 'inline-block'}} className={style.navButton} onClick={() => setCurrentPageNumber(prev => prev - 1)}>&lt;&lt;</button>
         {
           buttonsForPages.map(pageNumber => 
           <button className={
@@ -50,7 +50,7 @@ export default function App() {
             {pageNumber}
           </button>)
         }
-        <button disabled={currentPageNumber === totalPageCount ? true : false} className={style.navButton} onClick={() => setCurrentPageNumber(prev => prev + 1)}>&gt;&gt;</button>
+        <button style={{display: currentPageNumber === totalPageCount ? 'none' : 'inline-block'}} className={style.navButton} onClick={() => setCurrentPageNumber(prev => prev + 1)}>&gt;&gt;</button>
       </div>
 
       {
