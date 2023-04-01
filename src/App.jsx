@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import PostService from "./API/PostService.js";
 import useFetching from "./hooks/useFetching.jsx";
-import { getAdaptivePageNumbers, getNumberSequence, getPageCount } from "./utils/pages.js";
+import { getAdaptivePageNumbers, getPageCount } from "./utils/pages.js";
 
 import style from './App.module.css';
 
@@ -29,28 +29,44 @@ export default function App() {
 
   useEffect(() => {
     fetchPosts();
-    console.log(currentPageNumber)
   }, [currentPageNumber]);
+
+  const needToBeDisabled = (pageNumber) => {
+    return typeof pageNumber !== 'number' ? true : false
+  }
+  const needToBeHiddenLeft = () => {
+    return currentPageNumber === 1 ? 'none' : 'inline-block'
+  }
+  const needToBeHiddenRight = () => {
+    return currentPageNumber === totalPageCount ? 'none' : 'inline-block'
+  }
+
+  const decrementPage = () => {
+    setCurrentPageNumber(prev => prev - 1)
+  }
+  const incrementPage = () => {
+    setCurrentPageNumber(prev => prev + 1)
+  }
 
   return(
     <div>
       <h1>Those are pages numbers</h1>
 
       <div className={style.buttonsPanel}>
-        <button style={{display: currentPageNumber === 1 ? 'none' : 'inline-block'}} className={style.navButton} onClick={() => setCurrentPageNumber(prev => prev - 1)}>&lt;&lt;</button>
+        <button style={{display: needToBeHiddenLeft()}} className={style.navButton} onClick={decrementPage}>&lt;&lt;</button>
         {
           buttonsForPages.map(pageNumber => 
           <button className={
             currentPageNumber === pageNumber ?
             style.navButtonCurrent :
             style.navButton}
-            disabled={typeof pageNumber !== 'number' ? true : false}
+            disabled={needToBeDisabled(pageNumber)}
             onClick={() => setCurrentPageNumber(pageNumber)}
           >
             {pageNumber}
           </button>)
         }
-        <button style={{display: currentPageNumber === totalPageCount ? 'none' : 'inline-block'}} className={style.navButton} onClick={() => setCurrentPageNumber(prev => prev + 1)}>&gt;&gt;</button>
+        <button style={{display: needToBeHiddenRight()}} className={style.navButton} onClick={incrementPage}>&gt;&gt;</button>
       </div>
 
       {

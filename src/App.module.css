@@ -4,6 +4,7 @@
 
 .buttonsPanel{
   margin-bottom: 15px;
+  transition: 1s ease-in;
 }
 
 .navButton{
@@ -14,15 +15,6 @@
   background-color: white;
   margin: 0 1px;
 }
-
-/* .navButtonInactive{
-  cursor: disabled;
-  width: 30px;
-  border: 2px solid teal;
-  border-radius: 2px;
-  background-color: white;
-  margin: 0 1px;
-} */
 
 .navButtonCurrent{
   cursor: pointer;
